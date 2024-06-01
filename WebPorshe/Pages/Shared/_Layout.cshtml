@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebPorshe</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebPorshe.styles.css" asp-append-version="true" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #28a745 !important;
+        }
+
+        .nav-link {
+            font-size: 1.1rem;
+        }
+
+        .navbar {
+            background-color: #fff;
+            border-bottom: 2px solid #28a745;
+        }
+
+            .navbar .nav-link {
+                color: #28a745 !important;
+            }
+
+                .navbar .nav-link:hover {
+                    color: #155724 !important;
+                }
+
+            .navbar .navbar-toggler {
+                border-color: rgba(40, 167, 69, 0.5);
+            }
+
+        .footer {
+            background-color: #28a745;
+            padding: 1.5rem 0;
+            font-size: 0.9rem;
+            color: #fff;
+        }
+
+            .footer a {
+                color: #fff;
+            }
+
+                .footer a:hover {
+                    text-decoration: none;
+                    color: #d4edda;
+                }
+
+        .navbar-text {
+            color: #28a745;
+        }
+
+        .btn-outline-light {
+            color: #28a745;
+            border-color: #28a745;
+        }
+
+            .btn-outline-light:hover {
+                background-color: #28a745;
+                color: #fff;
+            }
+
+        .container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .border-bottom.box-shadow {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">WebPorshe</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Index">Домашняя</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Porshes">Porshes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/SendMessage">Чат</a>
+                        </li>
+                    </ul>
+                    <div class="ml-auto">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
+                                <span class="navbar-text mr-3">Привет, @User.Identity.Name!</span>
+                                <button type="submit" class="btn btn-outline-light">Выход</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light">Вход</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container mt-4">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer text-muted mt-4">
+        <div class="container text-center">
+            &copy; 2024 - WebPorshe - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
